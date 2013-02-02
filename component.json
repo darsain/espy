@@ -1,0 +1,21 @@
+{
+	"name": "Espy",
+	"version": "0.1.0",
+	"main": "./dist/jquery.espy.js",
+	"dependencies": {
+		"jquery": ">=1.7"
+	},
+	"description": "jQuery plugin for on-scroll detecting whether the element entered or left the viewport.",
+	"homepage": "https://github.com/Darsain/espy",
+	"bugs": "https://github.com/Darsain/espy/issues",
+	"repository": {
+		"type": "git",
+		"url": "http://github.com/Darsain/espy.git"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "http://opensource.org/licenses/MIT"
+		}
+	]
+}

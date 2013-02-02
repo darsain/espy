@@ -1,0 +1,29 @@
+{
+	"name": "espy",
+	"title": "Espy",
+	"description": "On-scroll detecting whether the element entered or left the viewport.",
+	"keywords": [
+		"scroll",
+		"spy",
+		"element",
+		"viewport"
+	],
+	"version": "0.1.0",
+	"author": {
+		"name": "Darsain",
+		"url": "http://darsa.in"
+	},
+	"bugs": "https://github.com/Darsain/espy/issues",
+	"homepage": "https://github.com/Darsain/espy",
+	"docs": "https://github.com/Darsain/espy/wiki",
+	"download": "https://raw.github.com/Darsain/espy/master/dist/jquery.espy.min.js",
+	"dependencies": {
+		"jquery": ">=1.7"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "http://opensource.org/licenses/MIT"
+		}
+	]
+}
