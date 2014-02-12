@@ -3,11 +3,11 @@
 module.exports = function(grunt) {
 	'use strict';
 
-	var fs = require('fs'),
-		jshintOptions = JSON.parse(fs.readFileSync('.jshintrc'));
+	// Override environment based line endings enforced by Grunt
+	grunt.util.linefeed = '\n';
 
 	grunt.initConfig({
-		pkg: '<json:component.json>',
+		pkg: grunt.file.readJSON('component.json'),
 		meta: {
 			banner: '/*!\n' +
 				' * <%= pkg.name %> <%= pkg.version %> - <%= grunt.template.today("dS mmm yyyy") %>\n' +
@@ -15,20 +15,27 @@ module.exports = function(grunt) {
 				' *\n' +
 				' * Licensed under the <%= pkg.licenses[0].type %> license.\n' +
 				' * <%= pkg.licenses[0].url %>\n' +
-				' */',
+				' */\n\n',
 			bannerLight: '/*! <%= pkg.name %> <%= pkg.version %>' +
 				' - <%= grunt.template.today("dS mmm yyyy") %> | <%= pkg.homepage %> */'
 		},
 		jshint: {
-			options: jshintOptions
-		},
-		lint: {
-			files: 'src/espy.js'
+			options: {
+				jshintrc: true
+			},
+			gruntfile: {
+				src: ['Gruntfile.js']
+			},
+			app: {
+				src: ['src/espy.js']
+			}
 		},
 		concat: {
+			options: {
+				banner: '<%= meta.banner %>'
+			},
 			dist: {
 				src: [
-					'<banner:meta.banner>',
 					'src/espy.js'
 				],
 				dest: 'dist/jquery.espy.js'
@@ -47,8 +54,10 @@ module.exports = function(grunt) {
 
 	// These plugins provide necessary tasks.
 	grunt.loadNpmTasks('grunt-gcc');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 
-	// Defined tasks
-	grunt.registerTask('default', 'lint');
-	grunt.registerTask('release', 'lint concat gcc');
+	// Tasks.
+	grunt.registerTask('default', 'jshint');
+	grunt.registerTask('release', ['jshint', 'concat', 'gcc']);
 };

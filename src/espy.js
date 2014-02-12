@@ -1,4 +1,4 @@
-;(function ($, w, undefined) {
+;(function ($, win, undefined) {
 	'use strict';
 
 	// Plugin names
@@ -330,7 +330,7 @@
 	// Extend jQuery
 	$.fn[pluginName] = function (callback, options) {
 		var method, methodArgs;
-		var context = options && options.context || w;
+		var context = options && options.context || win;
 		var espy = $.data(context, namespace) || $.data(context, namespace, new $[pluginClass](context));
 
 		// Attributes logic
@@ -341,14 +341,15 @@
 		}
 
 		// Apply to all elements
-		return this.each(function (i, element) {
+		return this.each(function () {
 			if (!method) {
 				// Adding element to spy on
-				espy.add(element, callback, options);
+				espy.add(this, callback, options);
 			} else {
 				// Call plugin method
-				if (typeof espy[method] === 'function') {
-					espy[method].apply(espy, methodArgs);
+				var m = espy[method];
+				if (typeof m === 'function') {
+					m.apply(espy, methodArgs);
 				}
 			}
 		});
@@ -357,10 +358,10 @@
 	// Default options
 	$.fn[pluginName].defaults = {
 		delay:      100,    // Events throttling delay in milliseconds.
-		context:    window, // Scrolling context.
+		context:    win,    // Scrolling context.
 		horizontal: 0,      // Enable for horizontal scrolling.
 		offset:     0,      // Target area offset from start (top in vert., left in hor.).
 		size:       '100%', // Target area size (height in vert., width in hor.).
 		contain:    0       // Trigger as entered only when element is completely within the target area.
 	};
-}(jQuery, window));
+})(jQuery, window);
