@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "grunt-gcc": "~0.3.1",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-concat": "~0.3.0"
+  }
+}
