@@ -3,6 +3,9 @@
 module.exports = function(grunt) {
 	'use strict';
 
+	// Override environment based line endings enforced by Grunt
+	grunt.util.linefeed = '\n';
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('component.json'),
 		meta: {
@@ -17,7 +20,9 @@ module.exports = function(grunt) {
 				' - <%= grunt.template.today("dS mmm yyyy") %> | <%= pkg.homepage %> */'
 		},
 		jshint: {
-			options: grunt.file.readJSON('.jshintrc'),
+			options: {
+				jshintrc: true
+			},
 			gruntfile: {
 				src: ['Gruntfile.js']
 			},
@@ -52,7 +57,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 
-	// Defined tasks
+	// Tasks.
 	grunt.registerTask('default', 'jshint');
 	grunt.registerTask('release', ['jshint', 'concat', 'gcc']);
 };
